@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quote of the Day</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Quote of the Day</h1>
+    <h2 id="streak">🔥 Streak: 0 days</h2>
+
+    <p id="welcome" style="font-weight: bold; color: green;"></p>
+
+    <div class="mood-selector">
+      <p>How are you feeling today?</p>
+      <button data-mood="happy">😊 Happy</button>
+      <button data-mood="sad">😢 Sad</button>
+      <button data-mood="angry">😡 Angry</button>
+      <button data-mood="motivated">💪 Motivated</button>
+    </div>
+
+    <div id="quote-box">
+      <p id="quote">Select your mood to get a quote!</p>
+      <span id="author"></span>
+    </div>
+
+    <div class="actions">
+      <button onclick="saveFavorite()">⭐ Save Quote</button>
+      <button onclick="readQuote()">🎤 Speak</button>
+      <button onclick="nextQuote()">🔄 New Quote</button>
+      <button onclick="shareToWhatsApp()">📤 Share to WhatsApp</button>
+    </div>
+
+    <div class="links">
+      <a href="favorites.html">⭐ Favorites</a>
+      <a href="journal.html">📝 Journal</a>
+    </div>
+  </div>
+
+  <!-- Firebase JS SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCIAhl6iUQqUijzdRMopUrSmUjIkXlcGps",
+      authDomain: "quoteoftheday-755f9.firebaseapp.com",
+      projectId: "quoteoftheday-755f9",
+      storageBucket: "quoteoftheday-755f9.appspot.com",
+      messagingSenderId: "672026751803",
+      appId: "1:672026751803:web:66442609b95680363cfd1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("welcome").innerText = `Welcome, ${user.email}!`;
+      }
+    });
+  </script>
+
+  <!-- Scripts -->
+  <script src="scripts.js"></script>
+  <script>
+    function shareToWhatsApp() {
+      const quote = document.getElementById("quote").innerText;
+      const author = document.getElementById("author").innerText;
+      const fullQuote = `${quote} ${author ? "- " + author : ""}`;
+
+      const encodedQuote = encodeURIComponent(fullQuote);
+      const whatsappURL = `https://wa.me/?text=${encodedQuote}`;
+      window.open(whatsappURL, '_blank');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Favorite Quotes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>⭐ Your Favorite Quotes</h1>
+    <div id="favorites-list"></div>
+    <a href="index.html">⬅️ Back to Quotes</a>
+  </div>
+
+  <script>
+    const container = document.getElementById("favorites-list");
+    const saved = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (saved.length === 0) {
+      container.innerHTML = "<p>No favorites yet!</p>";
+    } else {
+      saved.forEach((quote, index) => {
+        const box = document.createElement("div");
+        box.className = "quote-box";
+        box.innerHTML = `
+          <p>"${quote.text}"</p>
+          <span>— ${quote.author}</span><br>
+          <button onclick="removeFavorite(${index})">🗑 Remove</button>
+        `;
+        container.appendChild(box);
+      });
+    }
+
+    function removeFavorite(index) {
+      let favs = JSON.parse(localStorage.getItem("favorites"));
+      favs.splice(index, 1);
+      localStorage.setItem("favorites", JSON.stringify(favs));
+      location.reload();
+    }
+  </script>
+</body>
+</html>

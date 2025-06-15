@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Mood Journal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📔 Daily Mood Journal</h1>
+
+    <label for="journal-date">Select Date:</label>
+    <input type="date" id="journal-date" value="" />
+
+    <textarea id="journal-entry" rows="8" placeholder="How was your day? Write it out here..."></textarea>
+    <button onclick="saveEntry()">💾 Save Entry</button>
+    <button onclick="loadEntry()">📖 Load Entry</button>
+
+    <div id="confirmation" style="margin-top: 15px;"></div>
+    <a href="index.html">⬅️ Back to Quotes</a>
+  </div>
+
+  <script>
+    const journalInput = document.getElementById("journal-entry");
+    const dateInput = document.getElementById("journal-date");
+    const confirmation = document.getElementById("confirmation");
+
+    // Set today's date by default
+    dateInput.valueAsDate = new Date();
+
+    function saveEntry() {
+      const date = dateInput.value;
+      const entry = journalInput.value;
+      if (!date || !entry) {
+        confirmation.innerText = "Please select a date and write something.";
+        return;
+      }
+
+      localStorage.setItem(`journal-${date}`, entry);
+      confirmation.innerText = "✅ Saved successfully!";
+    }
+
+    function loadEntry() {
+      const date = dateInput.value;
+      const entry = localStorage.getItem(`journal-${date}`);
+      if (entry) {
+        journalInput.value = entry;
+        confirmation.innerText = "📖 Loaded your saved entry.";
+      } else {
+        journalInput.value = "";
+        confirmation.innerText = "No entry found for this date.";
+      }
+    }
+  </script>
+</body>
+</html>
