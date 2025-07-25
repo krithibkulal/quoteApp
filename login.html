@@ -1,75 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login / Register</title>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | QuoteApp</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   
+  <div class="login-container">
+    <h1>QuoteApp</h1>
+    <p class="login-tagline">Login or Register to get your daily inspiration 🌟</p>
 
-  <h2>Quote of the Day - Login/Register</h2>
+    <div class="login-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
 
-  <div>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <br><br>
-    <button onclick="register()">Register</button>
-    <button onclick="login()">Login</button>
-    <button onclick="logout()">Logout</button>
+      <div class="login-buttons">
+        <button onclick="register()">Register</button>
+        <button onclick="login()">Login</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
   </div>
 
-  <p id="message"></p>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCIAhl6iUQqUijzdRMopUrSmUjIkXlcGps",
-      authDomain: "quoteoftheday-755f9.firebaseapp.com",
-      projectId: "quoteoftheday-755f9",
-      storageBucket: "quoteoftheday-755f9.appspot.com",
-      messagingSenderId: "672026751803",
-      appId: "1:672026751803:web:66442609b95680363cfd1e"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    function register() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(user => {
-          document.getElementById("message").innerText = "Registered successfully!";
-        })
-        .catch(error => {
-          document.getElementById("message").innerText = error.message;
-        });
-    }
-
-function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  auth.signInWithEmailAndPassword(email, password)
-    .then(user => {
-      document.getElementById("message").innerText = "Logged in successfully!";
-      // Redirect to main app page after successful login
-      setTimeout(() => {
-        window.location.href = "index.html";  // change if your main page has another name
-      }, 1000); // 1 second delay so user can see the message
-    })
-    .catch(error => {
-      document.getElementById("message").innerText = error.message;
-    });
-}
-    function logout() {
-      auth.signOut().then(() => {
-        document.getElementById("message").innerText = "Logged out!";
-      });
-    }
-  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
-
-
-

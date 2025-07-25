@@ -177,3 +177,64 @@ h2 {
 .start-btn:hover {
   background-color: #5046d3;
 }
+ 
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #c9d6ff, #e2e2e2);
+}
+
+.login-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #6c63ff;
+}
+
+.login-tagline {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.login-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-form input {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.login-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.login-buttons button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #6c63ff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-buttons button:hover {
+  background-color: #5046d3;
+  transform: scale(1.05);
+}
